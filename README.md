@@ -192,7 +192,7 @@
     });
   </script>
   <div class="eco-box">
-    <img src= "logo1.jpg" width="100" height="100" />
+    <img src="lampara1.jpg" width="300" height="200" />
     <p>Esta lámpara cuida el planeta. Es de bajo consumo y tiene certificación Eco+.</p>
   </div>
   <footer>
