@@ -1,4 +1,4 @@
-# Lampara-Astra
+
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -130,7 +130,7 @@
       </button>
       
       <h3 style="text-align: center; color: #00eaff;">Comentarios de Clientes</h3>
-      <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+      <div id="listaComentarios" style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
         <p style="margin: 10px 0;">⭐️⭐️⭐️⭐️⭐️ "Muy bonita, hace mi cuarto gamer super cool"</p>
         <p style="margin: 10px 0;">⭐️⭐️⭐️⭐️ "Brilla muy bien y cambia con la música, la amo"</p>
         <p style="margin: 10px 0;">⭐️⭐️⭐️⭐️⭐️ "No gasta mucha energía y se ve genial"</p>
@@ -185,14 +185,14 @@
       // Limpiar formulario
       this.reset();
       
-      // Ocultar mensaje después de 3 segundos
+      // Ocultar mensaje después de 5 minutos (300000 milisegundos)
       setTimeout(() => {
         document.getElementById('mensajeExito').style.display = 'none';
       }, 300000);
     });
   </script>
   <div class="eco-box">
-    <img src="logo1.jpg" width="300" height="200" />
+    <img src= "logo1.jpg" width="100" height="100" />
     <p>Esta lámpara cuida el planeta. Es de bajo consumo y tiene certificación Eco+.</p>
   </div>
   <footer>
@@ -203,5 +203,4 @@
 </div>
 </footer>
 </body>
-
 </html>
