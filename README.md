@@ -188,7 +188,7 @@
       // Ocultar mensaje después de 3 segundos
       setTimeout(() => {
         document.getElementById('mensajeExito').style.display = 'none';
-      }, 3000);
+      }, 300000);
     });
   </script>
   <div class="eco-box">
