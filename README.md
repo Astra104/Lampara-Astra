@@ -165,8 +165,10 @@
             Publicar Comentario
           </button>
         </form>
+         <button onclick="document.getElementById('comentarios').style.display='none'" style="margin-bottom: 20px; padding: 10px 20px; background: #00eaff; border: none; color: black; font-weight: bold; border-radius: 5px; cursor: pointer;">
         <div id="mensajeExito" style="display: none; margin-top: 15px; padding: 10px; background: #00eaff; color: black; border-radius: 5px; text-align: center; font-weight: bold;">
-          ¡Gracias por tu comentario!
+          ¡Gracias por tu comentario! 
+        </button>
         </div>
       </div>
     </div>
