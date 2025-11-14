@@ -74,6 +74,12 @@
       padding: 15px;
       border-radius: 10px;
       width: 320px;
+      max-width: 100%;
+    }
+    .product img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
     }
     .stars {
       font-size: 0.9rem;
@@ -104,11 +110,17 @@
     }
     button:hover { background: #02b5c7; }
     .eco-box {
-      margin-top: 30px;
+      margin: 30px auto;
+      max-width: 600px;
       background: #1a1a1a;
       padding: 15px;
       border-radius: 10px;
       text-align: center;
+    }
+    .eco-box img {
+      max-width: 100px;
+      width: 100%;
+      height: auto;
     }
     .eco-img {
       width: 100px;
@@ -117,9 +129,43 @@
     footer {
       text-align: center;
       margin-top: 20px;
-      padding: 10px;
+      padding: 20px 15px;
       color: #ccc;
       font-size: 0.8rem;
+    }
+    footer p {
+      margin: 0 0 20px 0;
+      line-height: 1.6;
+    }
+    footer img {
+      max-width: 100%;
+      max-height: 400px;
+      height: auto;
+      border-radius: 10px;
+    }
+    
+    /* Responsive para tablets y móviles */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      .product {
+        width: 100%;
+      }
+      .eco-box {
+        margin: 20px 10px;
+      }
+      footer {
+        font-size: 0.65rem;
+        padding: 15px 10px;
+      }
+      footer h2 {
+        font-size: 1.2rem;
+        margin: 20px 0 10px 0;
+      }
+      footer img {
+        max-height: 300px;
+      }
     }
   </style>
 </head>
@@ -130,7 +176,7 @@
       <div class="stars" onclick="document.getElementById('comentarios').style.display='block'">★★★★★ 4.5 / 5</div>
       <h2>Lámpara RGB Gamer</h2>
       <p>Cambia de color con la música. Perfecta para gamers y cuartos modernos. Luz suave y colores vivos.</p>
-      <img src="lampara1.jpg" width="300" height="200" />
+      <img src="lampara1.jpg" alt="Lámpara RGB Gamer" style="width: 100%; max-width: 300px; height: auto; border-radius: 5px;" />
       <p><b>Precio:</b> $180.900 COP</p>
       <button>Comprar Ahora</button>
     </div>
@@ -224,15 +270,15 @@
     });
   </script>
   <div class="eco-box">
-    <img src= logo1.jpg width="100" height="100" />
+    <img src= "logo1.jpg" width="100" height="100" />
     <p>Esta lámpara cuida el planeta. Es de bajo consumo y tiene certificación Eco+.</p>
   </div>
   <footer>
-    Laura Sofía Chacón • Carlos Gómez • Miguel Hernández • Karol Riaño • Cesar Santiago Guasca • Beiker Nivia • Matías Toscano
-  <div style="margin-top:40px;text-align:center;">
-  <h2>Próximamente</h2>
-  <img src="lampara2.jpg" width="400" height="400" />
-</div>
-</footer>
+    <p>Laura Sofía Chacón • Carlos Gómez • Miguel Hernández • Karol Riaño • Cesar Santiago Guasca • Beiker Nivia • Matías Toscano</p>
+    <div style="margin-top:40px;text-align:center;">
+      <h2>Próximamente</h2>
+      <img src="lampara2.jpg" alt="Próximo modelo" style="max-width: 100%; height: auto;" />
+    </div>
+  </footer>
 </body>
 </html>
