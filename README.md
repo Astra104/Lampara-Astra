@@ -179,14 +179,14 @@
   </div>
 
   <div id="historia" style="display:none; padding: 40px 20px; background: #2a2a2a;">
-    <div style="max-width: 800px; margin: 0 auto;">
+    <div style="max-width: 900px; margin: 0 auto;">
       <button onclick="document.getElementById('historia').style.display='none'; window.scrollTo({top: 0, behavior: 'smooth'});" style="margin-bottom: 20px; padding: 10px 20px; background: #00eaff; border: none; color: black; font-weight: bold; border-radius: 5px; cursor: pointer; width: auto;">
         ← Volver al Inicio
       </button>
       
       <h2 style="text-align: center; color: #00eaff; margin-bottom: 30px;">Historia y Visión del Proyecto</h2>
       
-      <div style="background: #1a1a1a; padding: 25px; border-radius: 10px; line-height: 1.8; text-align: justify;">
+      <div style="background: #1a1a1a; padding: 25px; border-radius: 10px; line-height: 1.8; text-align: justify; font-size: 1rem;">
         <h3 style="color: #00eaff; margin-top: 0;">El Sueño</h3>
         <p>Este proyecto de mecatrónica nació de un sueño sencillo pero poderoso: crear una luz capaz de transformarse, de cambiar de color, de intensidad y de vida según el momento. Una luz que no solo iluminara un espacio, sino que expresara emociones.</p>
         
@@ -288,7 +288,7 @@
     });
   </script>
   <div class="eco-box">
-    <img src= "logo1.jpg" width="100" height="100" />
+    <img src= logo1.jpg width="100" height="100" />
     <p>Esta lámpara cuida el planeta. Es de bajo consumo y tiene certificación Eco+.</p>
   </div>
   <footer>
