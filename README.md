@@ -1,5 +1,4 @@
 
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -108,8 +107,18 @@
       font-weight: bold;
       border-radius: 5px;
       cursor: pointer;
+      margin-top: 10px;
     }
     button:hover { background: #02b5c7; }
+    
+    .btn-secundario {
+      background: #555 !important;
+      color: white !important;
+    }
+    .btn-secundario:hover {
+      background: #777 !important;
+    }
+    
     .eco-box {
       margin: 30px 20px;
       background: #1a1a1a;
@@ -165,8 +174,31 @@
       <img src="lampara1.jpg" width="300" height="200" />
       <p><b>Precio:</b> $180.900 COP</p>
       <button>Comprar Ahora</button>
+      <button class="btn-secundario" onclick="document.getElementById('historia').style.display='block'; window.scrollTo({top: document.getElementById('historia').offsetTop, behavior: 'smooth'});">Historia y Visión</button>
     </div>
   </div>
+
+  <div id="historia" style="display:none; padding: 40px 20px; background: #2a2a2a;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <button onclick="document.getElementById('historia').style.display='none'; window.scrollTo({top: 0, behavior: 'smooth'});" style="margin-bottom: 20px; padding: 10px 20px; background: #00eaff; border: none; color: black; font-weight: bold; border-radius: 5px; cursor: pointer; width: auto;">
+        ← Volver al Inicio
+      </button>
+      
+      <h2 style="text-align: center; color: #00eaff; margin-bottom: 30px;">Historia y Visión del Proyecto</h2>
+      
+      <div style="background: #1a1a1a; padding: 25px; border-radius: 10px; line-height: 1.8; text-align: justify;">
+        <h3 style="color: #00eaff; margin-top: 0;">El Sueño</h3>
+        <p>Este proyecto de mecatrónica nació de un sueño sencillo pero poderoso: crear una luz capaz de transformarse, de cambiar de color, de intensidad y de vida según el momento. Una luz que no solo iluminara un espacio, sino que expresara emociones.</p>
+        
+        <h3 style="color: #00eaff; margin-top: 25px;">El Diseño</h3>
+        <p>A partir de esa idea, comenzó el diseño de una estructura helicoidal, donde un tubo central y una cinta translúcida permitieran que el color viajara en espiral. En su interior, un sistema de LEDs RGB controlados electrónicamente se encarga de generar transiciones suaves y efectos dinámicos. Gracias a un microcontrolador, la lámpara puede modular su brillo, variar su tonalidad y responder a distintos modos preprogramados, creando un espectáculo visual en movimiento.</p>
+        
+        <h3 style="color: #00eaff; margin-top: 25px;">La Realidad</h3>
+        <p>Lo que empezó como un sueño terminó convirtiéndose en un proyecto real: una lámpara inteligente que combina diseño, electrónica y creatividad, demostrando que la mecatrónica puede convertir la imaginación en luz.</p>
+      </div>
+    </div>
+  </div>
+
   <div id="comentarios" style="display:none; padding: 40px 20px; background: #2a2a2a;">
     <div style="max-width: 800px; margin: 0 auto;">
       <button onclick="document.getElementById('comentarios').style.display='none'" style="margin-bottom: 20px; padding: 10px 20px; background: #00eaff; border: none; color: black; font-weight: bold; border-radius: 5px; cursor: pointer;">
