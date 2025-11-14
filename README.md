@@ -69,28 +69,18 @@
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
-      align-items: flex-start;
     }
     .product {
       background: #1a1a1a;
       padding: 15px;
       border-radius: 10px;
       width: 320px;
-      max-width: 90%;
-      margin: 0 auto;
+      max-width: 100%;
     }
     .product img {
       max-width: 100%;
       height: auto;
       border-radius: 5px;
-    }
-    
-    @media (max-width: 768px) {
-      .product {
-        width: 95%;
-        max-width: 400px;
-        padding: 12px;
-      }
     }
     .stars {
       font-size: 0.9rem;
@@ -121,8 +111,7 @@
     }
     button:hover { background: #02b5c7; }
     .eco-box {
-      margin: 30px auto;
-      max-width: 600px;
+      margin: 30px 20px;
       background: #1a1a1a;
       padding: 15px;
       border-radius: 10px;
@@ -130,7 +119,6 @@
     }
     .eco-box img {
       max-width: 100px;
-      width: 100%;
       height: auto;
     }
     .eco-img {
@@ -140,19 +128,13 @@
     footer {
       text-align: center;
       margin-top: 20px;
-      padding: 20px 15px;
+      padding: 10px 15px;
       color: #ccc;
       font-size: 0.8rem;
     }
-    footer p {
-      margin: 0 0 20px 0;
-      line-height: 1.6;
-    }
     footer img {
       max-width: 100%;
-      max-height: 400px;
       height: auto;
-      border-radius: 10px;
     }
     
     /* Responsive para tablets y móviles */
@@ -163,19 +145,12 @@
       .product {
         width: 100%;
       }
-      .eco-box {
-        margin: 20px 10px;
-      }
       footer {
-        font-size: 0.65rem;
-        padding: 15px 10px;
+        font-size: 0.7rem;
+        padding: 10px 10px;
       }
       footer h2 {
         font-size: 1.2rem;
-        margin: 20px 0 10px 0;
-      }
-      footer img {
-        max-height: 300px;
       }
     }
   </style>
@@ -187,7 +162,7 @@
       <div class="stars" onclick="document.getElementById('comentarios').style.display='block'">★★★★★ 4.5 / 5</div>
       <h2>Lámpara RGB Gamer</h2>
       <p>Cambia de color con la música. Perfecta para gamers y cuartos modernos. Luz suave y colores vivos.</p>
-      <img src="lampara1.jpg" alt="Lámpara RGB Gamer" style="width: 100%; max-width: 300px; height: auto; border-radius: 5px;" />
+      <img src="lampara1.jpg" width="300" height="200" />
       <p><b>Precio:</b> $180.900 COP</p>
       <button>Comprar Ahora</button>
     </div>
@@ -241,113 +216,55 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="eco-box">
-      <img src="logo1.jpg" alt="Logo Eco+" />
-      <p>Esta lámpara cuida el planeta. Es de bajo consumo y tiene certificación Eco+.</p>
-    </div>
-  </div>
-
   <script>
-    // Cargar comentarios guardados al iniciar
-    async function cargarComentarios() {
-      try {
-        const result = await window.storage.list('comentario:', true);
-        if (result && result.keys) {
-          const listaComentarios = document.getElementById('listaComentarios');
-          
-          // Obtener todos los comentarios
-          const comentarios = [];
-          for (const key of result.keys) {
-            const data = await window.storage.get(key, true);
-            if (data && data.value) {
-              comentarios.push(JSON.parse(data.value));
-            }
-          }
-          
-          // Ordenar por fecha (más recientes primero)
-          comentarios.sort((a, b) => b.timestamp - a.timestamp);
-          
-          // Agregar comentarios a la lista
-          comentarios.forEach(comentario => {
-            agregarComentarioALista(comentario.nombre, comentario.calificacion, comentario.texto);
-          });
-        }
-      } catch (error) {
-        console.log('No hay comentarios previos o error al cargar:', error);
-      }
-    }
-    
-    // Función para agregar comentario a la lista
-    function agregarComentarioALista(nombre, calificacion, texto) {
-      let estrellas = '';
-      for (let i = 0; i < calificacion; i++) {
-        estrellas += '⭐️';
-      }
-      
-      const nuevoComentario = document.createElement('p');
-      nuevoComentario.style.margin = '10px 0';
-      nuevoComentario.style.borderLeft = '3px solid #00eaff';
-      nuevoComentario.style.paddingLeft = '10px';
-      nuevoComentario.innerHTML = `${estrellas} <strong style="color: #00eaff;">${nombre}:</strong> "${texto}"`;
-      
-      const listaComentarios = document.getElementById('listaComentarios');
-      listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild);
-    }
-    
-    // Cargar comentarios al cargar la página
-    cargarComentarios();
-    
-    document.getElementById('formComentario').addEventListener('submit', async function(e) {
+    document.getElementById('formComentario').addEventListener('submit', function(e) {
       e.preventDefault();
       const nombre = document.getElementById('nombre').value;
       const calificacion = document.getElementById('calificacion').value;
       const comentario = document.getElementById('comentarioTexto').value;
       
-      // Guardar comentario en el almacenamiento compartido
-      const timestamp = Date.now();
-      const comentarioData = {
-        nombre: nombre,
-        calificacion: parseInt(calificacion),
-        texto: comentario,
-        timestamp: timestamp
-      };
-      
-      try {
-        await window.storage.set(`comentario:${timestamp}`, JSON.stringify(comentarioData), true);
-        
-        // Agregar comentario a la lista
-        agregarComentarioALista(nombre, calificacion, comentario);
-        
-        // Mostrar mensaje de éxito
-        document.getElementById('mensajeExito').style.display = 'block';
-        
-        // Limpiar formulario
-        this.reset();
-        
-        // Scroll suave hacia los comentarios
-        document.getElementById('listaComentarios').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-        // Ocultar mensaje después de 5 minutos
-        setTimeout(() => {
-          document.getElementById('mensajeExito').style.display = 'none';
-        }, 300000);
-      } catch (error) {
-        console.error('Error al guardar comentario:', error);
-        alert('Hubo un error al publicar tu comentario. Por favor intenta de nuevo.');
+      // Crear las estrellas según la calificación
+      let estrellas = '';
+      for (let i = 0; i < calificacion; i++) {
+        estrellas += '⭐️';
       }
+      
+      // Crear el nuevo comentario
+      const nuevoComentario = document.createElement('p');
+      nuevoComentario.style.margin = '10px 0';
+      nuevoComentario.style.borderLeft = '3px solid #00eaff';
+      nuevoComentario.style.paddingLeft = '10px';
+      nuevoComentario.innerHTML = `${estrellas} <strong style="color: #00eaff;">${nombre}:</strong> "${comentario}"`;
+      
+      // Agregar el comentario al inicio de la lista
+      const listaComentarios = document.getElementById('listaComentarios');
+      listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild);
+      
+      // Mostrar mensaje de éxito
+      document.getElementById('mensajeExito').style.display = 'block';
+      
+      // Limpiar formulario
+      this.reset();
+      
+      // Scroll suave hacia los comentarios
+      listaComentarios.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Ocultar mensaje después de 5 minutos (300000 milisegundos)
+      setTimeout(() => {
+        document.getElementById('mensajeExito').style.display = 'none';
+      }, 300000);
     });
   </script>
   <div class="eco-box">
-    <img src= logo1.jpg width="100" height="100" />
+    <img src= "logo1.jpg" width="100" height="100" />
     <p>Esta lámpara cuida el planeta. Es de bajo consumo y tiene certificación Eco+.</p>
   </div>
   <footer>
-    <p>Laura Sofía Chacón • Carlos Gómez • Miguel Hernández • Karol Riaño • Cesar Santiago Guasca • Beiker Nivia • Matías Toscano</p>
-    <div style="margin-top:40px;text-align:center;">
-      <h2>Próximamente</h2>
-      <img src="lampara2.jpg" alt="Próximo modelo" style="max-width: 100%; height: auto;" />
-    </div>
-  </footer>
+    Laura Sofía Chacón • Carlos Gómez • Miguel Hernández • Karol Riaño • Cesar Santiago Guasca • Beiker Nivia • Matías Toscano
+  <div style="margin-top:40px;text-align:center;">
+  <h2>Próximamente</h2>
+  <img src="lampara2.jpg" width="400" height="400" />
+</div>
+</footer>
 </body>
 </html>
