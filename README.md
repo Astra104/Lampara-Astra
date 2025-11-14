@@ -1,4 +1,5 @@
 
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -68,6 +69,7 @@
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
+      align-items: flex-start;
     }
     .product {
       background: #1a1a1a;
@@ -236,6 +238,13 @@
           ¡Gracias por tu comentario!
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="eco-box">
+      <img src="logo1.jpg" alt="Logo Eco+" />
+      <p>Esta lámpara cuida el planeta. Es de bajo consumo y tiene certificación Eco+.</p>
     </div>
   </div>
 
