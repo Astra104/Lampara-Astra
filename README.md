@@ -74,12 +74,21 @@
       padding: 15px;
       border-radius: 10px;
       width: 320px;
-      max-width: 100%;
+      max-width: 90%;
+      margin: 0 auto;
     }
     .product img {
       max-width: 100%;
       height: auto;
       border-radius: 5px;
+    }
+    
+    @media (max-width: 768px) {
+      .product {
+        width: 95%;
+        max-width: 400px;
+        padding: 12px;
+      }
     }
     .stars {
       font-size: 0.9rem;
@@ -231,46 +240,97 @@
   </div>
 
   <script>
-    document.getElementById('formComentario').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nombre = document.getElementById('nombre').value;
-      const calificacion = document.getElementById('calificacion').value;
-      const comentario = document.getElementById('comentarioTexto').value;
-      
-      // Crear las estrellas según la calificación
+    // Cargar comentarios guardados al iniciar
+    async function cargarComentarios() {
+      try {
+        const result = await window.storage.list('comentario:', true);
+        if (result && result.keys) {
+          const listaComentarios = document.getElementById('listaComentarios');
+          
+          // Obtener todos los comentarios
+          const comentarios = [];
+          for (const key of result.keys) {
+            const data = await window.storage.get(key, true);
+            if (data && data.value) {
+              comentarios.push(JSON.parse(data.value));
+            }
+          }
+          
+          // Ordenar por fecha (más recientes primero)
+          comentarios.sort((a, b) => b.timestamp - a.timestamp);
+          
+          // Agregar comentarios a la lista
+          comentarios.forEach(comentario => {
+            agregarComentarioALista(comentario.nombre, comentario.calificacion, comentario.texto);
+          });
+        }
+      } catch (error) {
+        console.log('No hay comentarios previos o error al cargar:', error);
+      }
+    }
+    
+    // Función para agregar comentario a la lista
+    function agregarComentarioALista(nombre, calificacion, texto) {
       let estrellas = '';
       for (let i = 0; i < calificacion; i++) {
         estrellas += '⭐️';
       }
       
-      // Crear el nuevo comentario
       const nuevoComentario = document.createElement('p');
       nuevoComentario.style.margin = '10px 0';
       nuevoComentario.style.borderLeft = '3px solid #00eaff';
       nuevoComentario.style.paddingLeft = '10px';
-      nuevoComentario.innerHTML = `${estrellas} <strong style="color: #00eaff;">${nombre}:</strong> "${comentario}"`;
+      nuevoComentario.innerHTML = `${estrellas} <strong style="color: #00eaff;">${nombre}:</strong> "${texto}"`;
       
-      // Agregar el comentario al inicio de la lista
       const listaComentarios = document.getElementById('listaComentarios');
       listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild);
+    }
+    
+    // Cargar comentarios al cargar la página
+    cargarComentarios();
+    
+    document.getElementById('formComentario').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const calificacion = document.getElementById('calificacion').value;
+      const comentario = document.getElementById('comentarioTexto').value;
       
-      // Mostrar mensaje de éxito
-      document.getElementById('mensajeExito').style.display = 'block';
+      // Guardar comentario en el almacenamiento compartido
+      const timestamp = Date.now();
+      const comentarioData = {
+        nombre: nombre,
+        calificacion: parseInt(calificacion),
+        texto: comentario,
+        timestamp: timestamp
+      };
       
-      // Limpiar formulario
-      this.reset();
-      
-      // Scroll suave hacia los comentarios
-      listaComentarios.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Ocultar mensaje después de 5 minutos (300000 milisegundos)
-      setTimeout(() => {
-        document.getElementById('mensajeExito').style.display = 'none';
-      }, 300000);
+      try {
+        await window.storage.set(`comentario:${timestamp}`, JSON.stringify(comentarioData), true);
+        
+        // Agregar comentario a la lista
+        agregarComentarioALista(nombre, calificacion, comentario);
+        
+        // Mostrar mensaje de éxito
+        document.getElementById('mensajeExito').style.display = 'block';
+        
+        // Limpiar formulario
+        this.reset();
+        
+        // Scroll suave hacia los comentarios
+        document.getElementById('listaComentarios').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Ocultar mensaje después de 5 minutos
+        setTimeout(() => {
+          document.getElementById('mensajeExito').style.display = 'none';
+        }, 300000);
+      } catch (error) {
+        console.error('Error al guardar comentario:', error);
+        alert('Hubo un error al publicar tu comentario. Por favor intenta de nuevo.');
+      }
     });
   </script>
   <div class="eco-box">
-    <img src= "logo1.jpg" width="100" height="100" />
+    <img src= logo1.jpg width="100" height="100" />
     <p>Esta lámpara cuida el planeta. Es de bajo consumo y tiene certificación Eco+.</p>
   </div>
   <footer>
